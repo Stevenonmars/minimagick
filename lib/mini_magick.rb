@@ -138,8 +138,12 @@ module MiniMagick
           block.call(tempfile)
           tempfile.close
 
+          binding.remote_pry
+          
           image = self.new(tempfile.path, tempfile)
 
+          binding.remote_pry
+          
           if validate and !image.valid?
             raise MiniMagick::Invalid
           end
@@ -175,6 +179,9 @@ module MiniMagick
     #
     # @return [Boolean]
     def valid?
+      
+      binding.remote_pry
+      
       run_command("identify", @path)
       true
     rescue MiniMagick::Invalid
